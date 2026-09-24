@@ -870,11 +870,45 @@ await track.applyConstraints({
 const settings =
   track.getSettings();
 
+const canvas =
+  document.querySelector(
+    "#container canvas"
+  );
+
 console.log(
-  "CÁMARA:",
+  "========== DIAGNÓSTICO =========="
+);
+
+console.log(
+  "CÁMARA REAL:",
   settings.width,
   "x",
   settings.height
+);
+
+console.log(
+  "VIDEO:",
+  video.videoWidth,
+  "x",
+  video.videoHeight
+);
+
+console.log(
+  "CANVAS INTERNO:",
+  canvas.width,
+  "x",
+  canvas.height
+);
+
+console.log(
+  "CANVAS CSS:",
+  canvas.clientWidth,
+  "x",
+  canvas.clientHeight
+);
+
+console.log(
+  "==============================="
 );
 
           /* =========================
