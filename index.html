@@ -900,6 +900,23 @@ console.log(
   "MINDAR INICIADO"
           );
 
+          const video =
+  document.querySelector(
+    "#container video"
+  );
+
+const track =
+  video.srcObject.getVideoTracks()[0];
+
+const settings =
+  track.getSettings();
+
+console.log(
+  "CÁMARA:",
+  settings.width,
+  "x",
+  settings.height
+);
 
           /* =========================
              BARRA COMPLETA
