@@ -843,9 +843,18 @@ detenerAnimacion();
 
          await mindarThree.start();
 
+renderer.setPixelRatio(
+  window.devicePixelRatio
+);
+
+renderer.setSize(
+  window.innerWidth,
+  window.innerHeight
+);
+
 console.log(
   "MINDAR INICIADO"
-          );
+);
 
           const video =
   document.querySelector(
