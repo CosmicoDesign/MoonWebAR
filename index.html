@@ -720,28 +720,20 @@
 
 
       if (
-        frameCalculado >=
-        frames.length
-      ) {
+  frameCalculado >=
+  frames.length
+) {
 
-        animando = false;
+  frameActual = 0;
 
+  tiempoInicio =
+    tiempoActual;
 
-        frameActual =
-          frames.length - 1;
+  mostrarFrame();
 
+  return;
 
-        mostrarFrame();
-
-
-        console.log(
-          "ANIMACIÓN TERMINADA"
-        );
-
-
-        return;
-
-      }
+}
 
 
       if (
