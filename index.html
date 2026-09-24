@@ -420,60 +420,6 @@
       scene,
       camera
     } = mindarThree;
-
-/* =========================
-   PRUEBA RESOLUCIÓN CÁMARA
-   ========================= */
-
-setTimeout(() => {
-
-  const video =
-    document.querySelector(
-      "#container video"
-    );
-
-  if (video) {
-
-    const textoResolucion =
-      document.createElement("div");
-
-    textoResolucion.style.position =
-      "fixed";
-
-    textoResolucion.style.top =
-      "10px";
-
-    textoResolucion.style.left =
-      "10px";
-
-    textoResolucion.style.zIndex =
-      "9999";
-
-    textoResolucion.style.color =
-      "#ffffff";
-
-    textoResolucion.style.background =
-      "#000000";
-
-    textoResolucion.style.padding =
-      "8px";
-
-    textoResolucion.style.fontSize =
-      "14px";
-
-    textoResolucion.textContent =
-      "Cámara: " +
-      video.videoWidth +
-      " x " +
-      video.videoHeight;
-
-    document.body.appendChild(
-      textoResolucion
-    );
-
-  }
-
-}, 3000);
     
     const anchor =
       mindarThree.addAnchor(0);
