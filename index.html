@@ -421,7 +421,30 @@
       camera
     } = mindarThree;
 
+/* =========================
+   PRUEBA RESOLUCIÓN CÁMARA
+   ========================= */
 
+setTimeout(() => {
+
+  const video =
+    document.querySelector(
+      "#container video"
+    );
+
+  if (video) {
+
+    console.log(
+      "RESOLUCIÓN CÁMARA:",
+      video.videoWidth,
+      "x",
+      video.videoHeight
+    );
+
+  }
+
+}, 3000);
+    
     const anchor =
       mindarThree.addAnchor(0);
 
