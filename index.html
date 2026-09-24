@@ -852,6 +852,16 @@ console.log(
     "#container video"
   );
 
+          const track =
+  video.srcObject.getVideoTracks()[0];
+
+console.log(
+  "ANTES DE CONSTRAINTS:",
+  video.videoWidth,
+  "x",
+  video.videoHeight
+);
+          
 const track =
   video.srcObject.getVideoTracks()[0];
 
