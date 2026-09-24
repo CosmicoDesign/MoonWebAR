@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>MOON</title>
+
+  <style>
+
+    @font-face {
+      font-family: "CartoonFun";
+      src: url("./Cartoon Fun.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+
+    /* =========================
+       BASE
+       ========================= */
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+
+      background: #000000;
+    }
+
+
+    /* =========================
+       CONTENEDOR AR
+       ========================= */
+
+    #container {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100vw;
+      height: 100vh;
+
+      overflow: hidden;
+
+      background: #000000;
+    }
+
+
+    /* =========================
+       CÁMARA
+       ========================= */
+
+    #container video {
+      position: fixed !important;
+
+      top: 0 !important;
+      left: 0 !important;
+
+      width: 100vw !important;
+      height: 100vh !important;
+
+      object-fit: cover !important;
+
+      z-index: 0 !important;
+
+      display: block !important;
+    }
+
+
+    /* =========================
+       CANVAS THREE.JS
+       ========================= */
+
+    #container canvas {
+      position: fixed !important;
+
+      top: 0 !important;
+      left: 0 !important;
+
+      width: 100vw !important;
+      height: 100vh !important;
+
+      z-index: 1 !important;
+
+      display: block !important;
+    }
+
+
+    /* =========================
+       PANTALLA DE CARGA
+       ========================= */
+
+    #pantallaCarga {
+      position: fixed;
+
+      inset: 0;
+
+      width: 100vw;
+      height: 100vh;
+
+      background: #000000;
+
+      z-index: 9999;
+
+      opacity: 1;
+
+      transition:
+        opacity 0.6s ease;
+
+      pointer-events: auto;
+    }
+
+
+    #pantallaCarga.ocultar {
+      opacity: 0;
+
+      pointer-events: none;
+    }
+
+
+    /* =========================
+       LOGO MOON
+       CENTRO EXACTO
+       ========================= */
+
+    #logoMoon {
+      position: absolute;
+
+      left: 50%;
+      top: 38%;
+
+      transform:
+        translate(-50%, -50%);
+
+      width: min(72vw, 500px);
+
+      height: auto;
+
+      display: block;
+
+      margin: 0;
+    }
+
+
+    /* =========================
+       ZONA DE CARGA
+       ========================= */
+
+    #zonaCarga {
+      position: absolute;
+
+      left: 50%;
+
+      top: calc(50% + 170px);
+
+      transform:
+        translateX(-50%);
+
+      width: min(55vw, 360px);
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+
+    /* =========================
+       TEXTO
+       ========================= */
+
+    #textoCarga {
+      color: #ffffff;
+
+      font-family:
+        "CartoonFun",
+        sans-serif;
+
+      font-size:
+        clamp(12px, 3.2vw, 26px);
+
+      letter-spacing: 1px;
+
+      text-align: center;
+
+      white-space: nowrap;
+
+      width: 100%;
+
+      margin: 0 0 6px 0;
+    }
+
+
+    /* =========================
+       BARRA
+       ========================= */
+
+    #barraExterior {
+      width: 100%;
+
+      height: 4px;
+
+      background: #252525;
+
+      overflow: hidden;
+    }
+
+
+    #barraInterior {
+      width: 0%;
+
+      height: 100%;
+
+      background: #ffffff;
+
+      transition:
+        width 0.2s ease;
+    }
+
+
+    /* =========================
+       MENSAJE DE PRUEBA
+       ========================= */
+
+    #mensaje {
+      position: fixed;
+
+      top: 20px;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+
+      z-index: 1000;
+
+      background: #000000;
+
+      color: #ffffff;
+
+      padding:
+        10px 18px;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      font-size: 14px;
+
+      display: none;
+    }
+
+  </style>
+
+
+  <!-- =========================
+       IMPORTS
+       ========================= -->
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+    }
+  }
+  </script>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       PANTALLA MOON
+       ========================= -->
+
+  <div id="pantallaCarga">
+
+
+    <!-- LOGO -->
+
+    <img
+      id="logoMoon"
+      src="./Moon Logo Carga.png"
+      alt="MOON"
+    >
+
+
+    <!-- TEXTO Y BARRA -->
+
+    <div id="zonaCarga">
+
+      <div id="textoCarga">
+        CARGANDO EXPERIENCIA
+      </div>
+
+
+      <div id="barraExterior">
+
+        <div id="barraInterior"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       CONTENEDOR AR
+       ========================= -->
+
+  <div id="container"></div>
+
+
+  <!-- =========================
+       MENSAJE DE PRUEBA
+       ========================= -->
+
+  <div id="mensaje">
+    TARGET DETECTADO
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+
+  <script type="module">
+
+    import * as THREE from "three";
+
+    import {
+      MindARThree
+    } from "mindar-image-three";
+
+
+    /* =========================
+       CONFIGURACIÓN
+       ========================= */
+
+    const TOTAL_FRAMES = 17;
+
+    // VELOCIDAD ACTUAL
+    const FPS = 5;
+
+    // POSICIÓN CORRECTA
+    const POSICION_Y = 0.19;
+
+
+    /* =========================
+       ELEMENTOS DE CARGA
+       ========================= */
+
+    const pantallaCarga =
+      document.querySelector(
+        "#pantallaCarga"
+      );
+
+
+    const barraInterior =
+      document.querySelector(
+        "#barraInterior"
+      );
+
+
+    let progresoFrames = 0;
+
+
+    function actualizarBarra() {
+
+      const porcentaje =
+        (
+          progresoFrames /
+          TOTAL_FRAMES
+        ) * 90;
+
+
+      barraInterior.style.width =
+        `${porcentaje}%`;
+
+    }
+
+
+    /* =========================
+       MINDAR
+       ========================= */
+
+    const mindarThree =
+      new MindARThree({
+
+        container:
+          document.querySelector(
+            "#container"
+          ),
+
+        imageTargetSrc:
+          "./targets.mind"
+
+      });
+
+
+    const {
+      renderer,
+      scene,
+      camera
+    } = mindarThree;
+
+
+    const anchor =
+      mindarThree.addAnchor(0);
+
+
+    /* =========================
+       MATERIAL
+       ========================= */
+
+    const material =
+      new THREE.MeshBasicMaterial({
+
+        transparent: true,
+
+        side: THREE.DoubleSide
+
+      });
+
+
+    /* =========================
+       PLANO
+       ========================= */
+
+    const geometry =
+      new THREE.PlaneGeometry(
+        1,
+        1
+      );
+
+
+    const plane =
+      new THREE.Mesh(
+        geometry,
+        material
+      );
+
+
+    plane.position.y =
+      POSICION_Y;
+
+
+    anchor.group.add(
+      plane
+    );
+
+
+    /* =========================
+       TEXTURAS
+       ========================= */
+
+    const textureLoader =
+      new THREE.TextureLoader();
+
+
+    const frames = [];
+
+
+    async function cargarFrames() {
+
+      console.log(
+        "CARGANDO 17 FRAMES..."
+      );
+
+
+      for (
+        let i = 1;
+        i <= TOTAL_FRAMES;
+        i++
+      ) {
+
+        const numero =
+          String(i)
+            .padStart(2, "0");
+
+
+        const archivo =
+          `./frame${numero}.png`;
+
+
+        try {
+
+          const texture =
+            await new Promise(
+              (
+                resolve,
+                reject
+              ) => {
+
+                textureLoader.load(
+
+                  archivo,
+
+                  resolve,
+
+                  undefined,
+
+                  reject
+
+                );
+
+              }
+            );
+
+
+          frames.push(
+            texture
+          );
+
+
+          /*
+           * IMPORTANTE:
+           * Precarga GPU.
+           */
+
+          renderer.initTexture(
+            texture
+          );
+
+
+          progresoFrames++;
+
+          actualizarBarra();
+
+
+          console.log(
+            `FRAME ${numero} CARGADO`
+          );
+
+
+        } catch (error) {
+
+          console.error(
+
+            `ERROR CARGANDO ${archivo}`,
+
+            error
+
+          );
+
+        }
+
+      }
+
+
+      console.log(
+        "FRAMES CARGADOS:",
+        frames.length
+      );
+
+
+      if (
+        frames.length > 0
+      ) {
+
+        ajustarProporcion(
+          frames[0]
+        );
+
+
+        material.map =
+          frames[0];
+
+
+        material.needsUpdate =
+          true;
+
+      }
+
+    }
+
+
+    /* =========================
+       PROPORCIÓN
+       ========================= */
+
+    function ajustarProporcion(
+      texture
+    ) {
+
+      const width =
+        texture.image.width;
+
+
+      const height =
+        texture.image.height;
+
+
+      const aspect =
+        width / height;
+
+
+      console.log(
+        "PROPORCIÓN:",
+        aspect
+      );
+
+
+      plane.scale.set(
+
+        1,
+
+        1 / aspect,
+
+        1
+
+      );
+
+    }
+
+
+    /* =========================
+       ANIMACIÓN
+       ========================= */
+
+    let animando = false;
+
+    let frameActual = 0;
+
+    let tiempoInicio = 0;
+
+    let targetDetectado = false;
+
+
+    function reproducirAnimacion() {
+
+      if (
+        frames.length === 0
+      ) {
+
+        return;
+
+      }
+
+
+      frameActual = 0;
+
+
+      tiempoInicio =
+        performance.now();
+
+
+      animando = true;
+
+
+      mostrarFrame();
+
+
+      console.log(
+        "ANIMACIÓN INICIADA DESDE FRAME 01"
+      );
+
+    }
+
+
+    function detenerAnimacion() {
+
+      animando = false;
+
+      frameActual = 0;
+
+      tiempoInicio = 0;
+
+
+      console.log(
+        "ANIMACIÓN DETENIDA"
+      );
+
+    }
+
+
+    function actualizarAnimacion(
+      tiempoActual
+    ) {
+
+      if (
+        !animando ||
+        frames.length === 0
+      ) {
+
+        return;
+
+      }
+
+
+      const tiempoTranscurrido =
+        tiempoActual -
+        tiempoInicio;
+
+
+      const frameCalculado =
+        Math.floor(
+
+          tiempoTranscurrido *
+          FPS /
+          1000
+
+        );
+
+
+      if (
+        frameCalculado >=
+        frames.length
+      ) {
+
+        animando = false;
+
+
+        frameActual =
+          frames.length - 1;
+
+
+        mostrarFrame();
+
+
+        console.log(
+          "ANIMACIÓN TERMINADA"
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        frameCalculado !==
+        frameActual
+      ) {
+
+        frameActual =
+          frameCalculado;
+
+
+        mostrarFrame();
+
+      }
+
+    }
+
+
+    /* =========================
+       MOSTRAR FRAME
+       ========================= */
+
+    function mostrarFrame() {
+
+      material.map =
+        frames[
+          frameActual
+        ];
+
+
+      material.needsUpdate =
+        true;
+
+
+      console.log(
+        "MOSTRANDO FRAME:",
+        frameActual + 1
+      );
+
+    }
+
+
+    /* =========================
+       TARGET ENCONTRADO
+       ========================= */
+
+    anchor.onTargetFound =
+      () => {
+
+        console.log(
+          "TARGET ENCONTRADO"
+        );
+
+
+        if (
+          targetDetectado
+        ) {
+
+          console.log(
+            "TARGET YA ESTABA DETECTADO - NO REINICIAR"
+          );
+
+
+          return;
+
+        }
+
+
+        targetDetectado =
+          true;
+
+
+        reproducirAnimacion();
+
+      };
+
+
+    /* =========================
+       TARGET PERDIDO
+       ========================= */
+
+    anchor.onTargetLost =
+      () => {
+
+        console.log(
+          "TARGET PERDIDO"
+        );
+
+
+        targetDetectado =
+          false;
+
+
+        detenerAnimacion();
+
+      };
+
+
+    /* =========================
+       INICIAR MINDAR
+       ========================= */
+
+    const start =
+      async () => {
+
+        try {
+
+          console.log(
+            "INICIANDO MINDAR"
+          );
+
+
+          await mindarThree.start();
+
+
+          console.log(
+            "MINDAR INICIADO"
+          );
+
+
+          /* =========================
+             BARRA COMPLETA
+             ========================= */
+
+          barraInterior.style.width =
+            "100%";
+
+
+          /* =========================
+             OCULTAR PANTALLA
+             ========================= */
+
+          setTimeout(
+            () => {
+
+              pantallaCarga.classList.add(
+                "ocultar"
+              );
+
+            },
+            250
+          );
+
+
+          /* =========================
+             LOOP
+             ========================= */
+
+          renderer.setAnimationLoop(
+            () => {
+
+              const tiempoActual =
+                performance.now();
+
+
+              actualizarAnimacion(
+                tiempoActual
+              );
+
+
+              renderer.render(
+                scene,
+                camera
+              );
+
+            }
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "ERROR:",
+            error
+          );
+
+        }
+
+      };
+
+
+    /* =========================
+       ARRANCAR
+       ========================= */
+
+    await cargarFrames();
+
+    start();
+
+  </script>
+
+</body>
+</html>
