@@ -908,6 +908,18 @@ console.log(
 const track =
   video.srcObject.getVideoTracks()[0];
 
+await track.applyConstraints({
+
+  width: {
+    ideal: 1280
+  },
+
+  height: {
+    ideal: 720
+  }
+
+});
+
 const settings =
   track.getSettings();
 
@@ -917,17 +929,6 @@ console.log(
   "x",
   settings.height
 );
-
-setTimeout(() => {
-
-  alert(
-    "Resolución cámara: " +
-    settings.width +
-    " x " +
-    settings.height
-  );
-
-}, 1000);
 
           /* =========================
              BARRA COMPLETA
