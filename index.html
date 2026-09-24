@@ -619,9 +619,9 @@
 
       plane.scale.set(
 
-         0.5625,
+   1,
 
-  1,
+  1 / aspect,
 
   1
 
@@ -866,6 +866,8 @@ await track.applyConstraints({
   }
 
 });
+
+video.style.aspectRatio = "16 / 9";
 
 const settings =
   track.getSettings();
