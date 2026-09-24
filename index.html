@@ -898,39 +898,6 @@ detenerAnimacion();
 
 console.log(
   "MINDAR INICIADO"
-);
-
-const video =
-  document.querySelector(
-    "#container video"
-  );
-
-console.log(
-  "RESOLUCIÓN CÁMARA:",
-  video.videoWidth,
-  "x",
-  video.videoHeight
-);
-
-const indicador =
-  document.createElement("div");
-
-indicador.style.position = "fixed";
-indicador.style.top = "10px";
-indicador.style.left = "10px";
-indicador.style.zIndex = "9999";
-indicador.style.color = "#ffffff";
-indicador.style.background = "#000000";
-indicador.style.padding = "8px";
-indicador.style.fontSize = "14px";
-
-indicador.textContent =
-  "Cámara: " +
-  video.videoWidth +
-  " x " +
-  video.videoHeight;
-
-document.body.appendChild(indicador);
           );
 
 
