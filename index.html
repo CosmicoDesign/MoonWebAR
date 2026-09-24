@@ -643,6 +643,9 @@
 
     let targetDetectado = false;
 
+    const mensaje = document.getElementById("mensaje");
+
+    mensaje.style.display = "block";
 
     function reproducirAnimacion() {
 
@@ -789,25 +792,16 @@
         );
 
 
-        if (
-          targetDetectado
-        ) {
+        if (targetDetectado) {
+  console.log("TARGET YA ESTABA DETECTADO - NO REINICIAR");
+  return;
+}
 
-          console.log(
-            "TARGET YA ESTABA DETECTADO - NO REINICIAR"
-          );
+targetDetectado = true;
 
+mensaje.style.display = "none";
 
-          return;
-
-        }
-
-
-        targetDetectado =
-          true;
-
-
-        reproducirAnimacion();
+reproducirAnimacion();
 
       };
 
