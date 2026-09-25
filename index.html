@@ -846,6 +846,17 @@ detenerAnimacion();
 console.log(
   "MINDAR INICIADO"
 );
+
+          const video =
+  document.querySelector("#container video");
+
+const track =
+  video.srcObject.getVideoTracks()[0];
+
+console.log(
+  "CAPACIDADES DE CÁMARA:",
+  track.getCapabilities()
+);
           
           /* =========================
              BARRA COMPLETA
