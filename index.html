@@ -847,6 +847,17 @@ console.log(
   "MINDAR INICIADO"
 );
 
+          const track =
+  document.querySelector("#container video")
+    .srcObject.getVideoTracks()[0];
+
+const settings =
+  track.getSettings();
+
+alert(
+  `CÁMARA: ${settings.width} × ${settings.height}\nMODO: ${settings.facingMode}`
+);
+          
           /* =========================
              BARRA COMPLETA
              ========================= */
