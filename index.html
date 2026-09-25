@@ -853,19 +853,19 @@ console.log(
 const track =
   video.srcObject.getVideoTracks()[0];
 
-console.log(
-  "CAPACIDADES DE CÁMARA:",
-  track.getCapabilities()
-);
-
           alert(
   JSON.stringify(
-    track.getCapabilities(),
+    track.getSettings(),
     null,
     2
   )
 );
           
+console.log(
+  "CAPACIDADES DE CÁMARA:",
+  track.getCapabilities()
+);
+        
           /* =========================
              BARRA COMPLETA
              ========================= */
