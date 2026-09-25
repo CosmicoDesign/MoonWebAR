@@ -401,29 +401,21 @@
        MINDAR
        ========================= */
 
-    const mindarThree =
-      new MindARThree({
+const mindarThree =
+  new MindARThree({
 
-        container:
-          document.querySelector(
-            "#container"
-          ),
+    container:
+      document.querySelector(
+        "#container"
+      ),
 
-        imageTargetSrc:
-          "./targets.mind"
+    imageTargetSrc:
+      "./targets.mind",
 
-      });
+    environmentDeviceId:
+      null
 
-
-    const {
-      renderer,
-      scene,
-      camera
-    } = mindarThree;
-    
-    const anchor =
-      mindarThree.addAnchor(0);
-
+  });
 
     /* =========================
        MATERIAL
@@ -840,6 +832,41 @@ detenerAnimacion();
             "INICIANDO MINDAR"
           );
 
+           const getUserMediaOriginal =
+    navigator.mediaDevices.getUserMedia.bind(
+      navigator.mediaDevices
+    );
+
+  navigator.mediaDevices.getUserMedia =
+    (constraints) => {
+
+      if (
+        constraints &&
+        constraints.video &&
+        typeof constraints.video === "object"
+      ) {
+
+        constraints = {
+          ...constraints,
+
+          video: {
+            ...constraints.video,
+
+            width: {
+              ideal: 1280
+            },
+
+            height: {
+              ideal: 720
+            }
+          }
+        };
+      }
+
+      return getUserMediaOriginal(
+        constraints
+      );
+    };
 
          await mindarThree.start();
 
