@@ -832,42 +832,6 @@ detenerAnimacion();
             "INICIANDO MINDAR"
           );
 
-           const getUserMediaOriginal =
-    navigator.mediaDevices.getUserMedia.bind(
-      navigator.mediaDevices
-    );
-
-  navigator.mediaDevices.getUserMedia =
-    (constraints) => {
-
-      if (
-        constraints &&
-        constraints.video &&
-        typeof constraints.video === "object"
-      ) {
-
-        constraints = {
-          ...constraints,
-
-          video: {
-            ...constraints.video,
-
-            width: {
-              ideal: 1280
-            },
-
-            height: {
-              ideal: 720
-            }
-          }
-        };
-      }
-
-      return getUserMediaOriginal(
-        constraints
-      );
-    };
-
          await mindarThree.start();
 
 console.log(
