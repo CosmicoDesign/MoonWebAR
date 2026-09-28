@@ -580,56 +580,81 @@
     }
 
 
-    anchor.onTargetFound =
+   anchor.onTargetFound =
+  () => {
+
+    console.log(
+      "TARGET ENCONTRADO"
+    );
+
+    if (
+      targetDetectado
+    ) {
+
+      console.log(
+        "TARGET YA ESTABA DETECTADO - NO REINICIAR"
+      );
+
+      return;
+
+    }
+
+    targetDetectado = true;
+
+    mensaje.style.display =
+      "none";
+
+
+    console.log(
+      "ESPERANDO 1.5 SEGUNDOS ANTES DE INICIAR..."
+    );
+
+
+    setTimeout(
       () => {
-
-        console.log(
-          "TARGET ENCONTRADO"
-        );
-
 
         if (
           targetDetectado
         ) {
 
           console.log(
-            "TARGET YA ESTABA DETECTADO - NO REINICIAR"
+            "INICIANDO ANIMACION"
           );
 
+          reproducirAnimacion();
 
-          return;
+        } else {
+
+          console.log(
+            "TARGET PERDIDO DURANTE LA ESPERA - ANIMACION CANCELADA"
+          );
 
         }
 
+      },
+      1500
+    );
 
-        targetDetectado = true;
-
-
-        mensaje.style.display =
-          "none";
-
-
-        reproducirAnimacion();
-
-      };
+  };
 
 
-    anchor.onTargetLost =
-      () => {
+anchor.onTargetLost =
+  () => {
 
-        console.log(
-          "TARGET PERDIDO"
-        );
+    console.log(
+      "TARGET PERDIDO"
+    );
 
-
-        targetDetectado = false;
-
-
-        mensaje.style.display =
-          "block";
+    targetDetectado = false;
 
 
-        detenerAnimacion();
+    mensaje.style.display =
+      "block";
+
+
+    detenerAnimacion();
+
+  };
 
       };
 
