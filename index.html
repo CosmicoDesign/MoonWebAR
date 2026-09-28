@@ -60,17 +60,32 @@
       display: block !important;
     }
 
-    #pantallaCarga {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000000 url("./Fondo Pantalla de carga.png") center center / 100% auto no-repeat;
-      z-index: 9999;
-      opacity: 1;
-      transition: opacity 0.6s ease;
-      pointer-events: auto;
-    }
+   #pantallaCarga {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  pointer-events: auto;
+}
+
+#fondoCarga {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
+#pantallaCarga.ocultar {
+  opacity: 0;
+  pointer-events: none;
+}
 
     #pantallaCarga.ocultar {
       opacity: 0;
@@ -155,13 +170,19 @@
 
 <body>
 
-  <div id="pantallaCarga">
+ <div id="pantallaCarga">
 
-    <img
-      id="logoMoon"
-      src="./Moon Logo Carga.png"
-      alt="MOON"
-    >
+  <img
+    id="fondoCarga"
+    src="./Fondo Pantalla de carga.png"
+    alt=""
+  >
+
+  <img
+    id="logoMoon"
+    src="./Moon Logo Carga.png"
+    alt="MOON"
+  >
 
     <div id="zonaCarga">
 
