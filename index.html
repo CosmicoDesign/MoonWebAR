@@ -579,7 +579,7 @@
 
     }
 
-    anchor.onTargetFound =
+      anchor.onTargetFound =
       () => {
 
         console.log(
@@ -609,7 +609,7 @@
 
 
         console.log(
-          "ESPERANDO 1.5 SEGUNDOS ANTES DE INICIAR..."
+          "CONFIRMANDO TARGET..."
         );
 
 
@@ -627,16 +627,10 @@
 
               reproducirAnimacion();
 
-            } else {
-
-              console.log(
-                "TARGET PERDIDO DURANTE LA ESPERA - ANIMACION CANCELADA"
-              );
-
             }
 
           },
-          1500
+          500
         );
 
       };
