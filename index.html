@@ -74,11 +74,11 @@
 
 #fondoCarga {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  inset: 0;
   width: 100%;
-  height: auto;
-  transform: translate(-50%, -50%);
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
   display: block;
 }
 
@@ -86,11 +86,6 @@
   opacity: 0;
   pointer-events: none;
 }
-
-    #pantallaCarga.ocultar {
-      opacity: 0;
-      pointer-events: none;
-    }
 
     #logoMoon {
       position: absolute;
