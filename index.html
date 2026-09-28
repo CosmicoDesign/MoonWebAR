@@ -579,82 +579,85 @@
 
     }
 
-
-   anchor.onTargetFound =
-  () => {
-
-    console.log(
-      "TARGET ENCONTRADO"
-    );
-
-    if (
-      targetDetectado
-    ) {
-
-      console.log(
-        "TARGET YA ESTABA DETECTADO - NO REINICIAR"
-      );
-
-      return;
-
-    }
-
-    targetDetectado = true;
-
-    mensaje.style.display =
-      "none";
-
-
-    console.log(
-      "ESPERANDO 1.5 SEGUNDOS ANTES DE INICIAR..."
-    );
-
-
-    setTimeout(
+    anchor.onTargetFound =
       () => {
+
+        console.log(
+          "TARGET ENCONTRADO"
+        );
+
 
         if (
           targetDetectado
         ) {
 
           console.log(
-            "INICIANDO ANIMACION"
+            "TARGET YA ESTABA DETECTADO - NO REINICIAR"
           );
 
-          reproducirAnimacion();
 
-        } else {
-
-          console.log(
-            "TARGET PERDIDO DURANTE LA ESPERA - ANIMACION CANCELADA"
-          );
+          return;
 
         }
 
-      },
-      1500
-    );
 
-  };
+        targetDetectado = true;
 
 
-anchor.onTargetLost =
-  () => {
-
-    console.log(
-      "TARGET PERDIDO"
-    );
-
-    targetDetectado = false;
+        mensaje.style.display =
+          "none";
 
 
-    mensaje.style.display =
-      "block";
+        console.log(
+          "ESPERANDO 1.5 SEGUNDOS ANTES DE INICIAR..."
+        );
 
 
-    detenerAnimacion();
+        setTimeout(
+          () => {
 
-  };
+            if (
+              targetDetectado
+            ) {
+
+              console.log(
+                "INICIANDO ANIMACION"
+              );
+
+
+              reproducirAnimacion();
+
+            } else {
+
+              console.log(
+                "TARGET PERDIDO DURANTE LA ESPERA - ANIMACION CANCELADA"
+              );
+
+            }
+
+          },
+          1500
+        );
+
+      };
+
+
+    anchor.onTargetLost =
+      () => {
+
+        console.log(
+          "TARGET PERDIDO"
+        );
+
+
+        targetDetectado = false;
+
+
+        mensaje.style.display =
+          "block";
+
+
+        detenerAnimacion();
 
       };
 
@@ -724,7 +727,6 @@ anchor.onTargetLost =
         }
 
       };
-
 
     await cargarFrames();
 
