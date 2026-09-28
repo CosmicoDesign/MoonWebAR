@@ -80,6 +80,7 @@
   object-fit: contain;
   object-position: center;
   display: block;
+  z-index: 0;
 }
 
 #pantallaCarga.ocultar {
@@ -88,25 +89,27 @@
 }
 
     #logoMoon {
-      position: absolute;
-      left: 50%;
-      top: 38%;
-      transform: translate(-50%, -50%);
-      width: min(72vw, 500px);
-      height: auto;
-      display: block;
-      margin: 0;
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  width: min(72vw, 500px);
+  height: auto;
+  display: block;
+  margin: 0;
+  z-index: 1;
     }
 
     #zonaCarga {
-      position: absolute;
-      left: 50%;
-      top: calc(50% + 170px);
-      transform: translateX(-50%);
-      width: min(55vw, 360px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 170px);
+  transform: translateX(-50%);
+  width: min(55vw, 360px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
     }
 
     #textoCarga {
