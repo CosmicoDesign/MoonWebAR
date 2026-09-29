@@ -72,15 +72,6 @@
   pointer-events: auto;
 }
 
-#fondoCarga {
-  position: absolute;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  z-index: 0;
-}
-
 #pantallaCarga.ocultar {
   opacity: 0;
   pointer-events: none;
@@ -150,6 +141,67 @@
       display: none;
     }
 
+ /* PLANETA DE CARGA */
+
+    #planetaCarga {
+      position: absolute;
+      left: 50%;
+      top: 58%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+    }
+
+    .planeta {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      margin: 10px auto;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+
+    .anillo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 105px;
+      height: 30px;
+      border: 1.5px solid #ffffff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) rotate(-18deg);
+      box-sizing: border-box;
+    }
+
+    .crater {
+      position: absolute;
+      border: 1px solid #ffffff;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    .crater1 {
+      width: 10px;
+      height: 10px;
+      left: 18px;
+      top: 16px;
+    }
+
+    .crater2 {
+      width: 6px;
+      height: 6px;
+      left: 40px;
+      top: 34px;
+    }
+
+    .crater3 {
+      width: 8px;
+      height: 8px;
+      left: 27px;
+      top: 47px;
+    }
+    
   </style>
 
   <script type="importmap">
@@ -169,17 +221,20 @@
  <div id="pantallaCarga">
 
   <img
-    id="fondoCarga"
-    src="./Fondo Pantalla de carga.png"
-    alt=""
-  >
-
-  <img
     id="logoMoon"
     src="./Moon Logo Carga.png"
     alt="MOON"
   >
 
+   <div id="planetaCarga">
+    <div class="planeta">
+      <div class="anillo"></div>
+      <div class="crater crater1"></div>
+      <div class="crater crater2"></div>
+      <div class="crater crater3"></div>
+    </div>
+  </div>
+   
   <div id="zonaCarga">
 
     <div id="textoCarga">
