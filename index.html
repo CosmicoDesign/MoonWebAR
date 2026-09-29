@@ -153,6 +153,43 @@
       opacity: 0.80;
     }
 
+#planetaCarga::before,
+#planetaCarga::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: destello 2.8s ease-in-out infinite;
+}
+
+#planetaCarga::before {
+  left: 5px;
+  top: 18px;
+  animation-delay: 0.4s;
+}
+
+#planetaCarga::after {
+  right: 3px;
+  top: 58px;
+  animation-delay: 1.5s;
+}
+
+@keyframes destello {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+    
     .planeta {
       position: relative;
       width: 70px;
