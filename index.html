@@ -141,6 +141,64 @@
       display: none;
     }
 
+    #destellosCarga {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: 130px;
+  height: 110px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.destello {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: destelloBrillo 2.5s ease-in-out infinite;
+}
+
+.d1 {
+  left: 5px;
+  top: 25px;
+  animation-delay: 0s;
+}
+
+.d2 {
+  right: 8px;
+  top: 15px;
+  animation-delay: 0.8s;
+}
+
+.d3 {
+  left: 18px;
+  bottom: 8px;
+  animation-delay: 1.4s;
+}
+
+.d4 {
+  right: 2px;
+  bottom: 20px;
+  animation-delay: 2s;
+}
+
+@keyframes destelloBrillo {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+    
  /* PLANETA DE CARGA */
 
     #planetaCarga {
@@ -153,43 +211,6 @@
       opacity: 0.80;
     }
 
-#planetaCarga::before,
-#planetaCarga::after {
-  content: "";
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #ffffff;
-  border-radius: 50%;
-  opacity: 0;
-  animation: destello 2.8s ease-in-out infinite;
-}
-
-#planetaCarga::before {
-  left: 58px;
-  top: 15px;
-  animation-delay: 0.4s;
-}
-
-#planetaCarga::after {
-  right: 5px;
-  top: 55px;
-  animation-delay: 1.5s;
-}
-
-@keyframes destello {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-
-  50% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-}
-    
     .planeta {
       position: relative;
       width: 70px;
@@ -294,6 +315,13 @@
     alt="MOON"
   >
 
+   <div id="destellosCarga">
+  <span class="destello d1"></span>
+  <span class="destello d2"></span>
+  <span class="destello d3"></span>
+  <span class="destello d4"></span>
+</div>
+   
    <div id="planetaCarga">
     <div class="planeta">
       <div class="anillo"></div>
