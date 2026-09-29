@@ -162,32 +162,20 @@
   background: #ffffff;
   border-radius: 50%;
   opacity: 0;
+  z-index: 0;
   animation: destello 2.8s ease-in-out infinite;
 }
 
 #planetaCarga::before {
-  left: 5px;
-  top: 18px;
+  left: -5px;
+  top: 8px;
   animation-delay: 0.4s;
 }
 
 #planetaCarga::after {
-  right: 3px;
-  top: 58px;
+  right: -5px;
+  top: 65px;
   animation-delay: 1.5s;
-}
-
-@keyframes destello {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-
-  50% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
 }
     
     .planeta {
@@ -199,6 +187,7 @@
       border-radius: 50%;
       box-sizing: border-box;
       animation: planetaFlota 3s ease-in-out infinite;
+      z-index: 1;
     }
 
     .anillo {
